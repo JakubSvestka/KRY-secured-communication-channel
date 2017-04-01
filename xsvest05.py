@@ -273,7 +273,7 @@ def main():
 
 	(options, args) = parser.parse_args()
 	
-	if options.server:
+	if options.server and not options.client:
 		debug("Hello, I am server")
 		ffs = FFS()
 		valid = 0
@@ -303,7 +303,7 @@ def main():
 
 		#server loop
 		server()
-	elif options.client:
+	elif options.client and not options.server:
 		debug("Hello, I am client")
 		ffs = FFS()
 		FFSClient(ffs)
@@ -329,6 +329,11 @@ def main():
 
 		#client loop
 		client()
+	elif options.client and options.server:
+		sys.stderr.write("Parameters -c and -s are mutually exclusive\n")
+		pipe.close()
+		sys.exit(2)
+
 	else:
 		#either server or client must be set
 		sys.stderr.write("Either -s or -c must be set\n")

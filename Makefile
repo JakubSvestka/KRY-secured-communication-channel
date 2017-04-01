@@ -4,9 +4,10 @@ FILES=xsvest05.py dh.py ffs.py pipe.py Makefile
 
 clean:
 	rm -rf *.pyc
+	rm -rf __pycache__
 	rm -rf $(ARCHIVE).tar.gz
-	rm xsvest05_pipe
-	rm xsvest05_pipe_ack
+	rm -rf xsvest05_pipe
+	rm -rf xsvest05_pipe_ack
 
 archive:
 	tar -pczf $(ARCHIVE).tar.gz $(FILES) $(DOCUMENTATION)
